@@ -1,0 +1,11 @@
+<mat-form-field class="example-full-width">
+  <input matInput name="searchQuery"
+         #searchQuery
+         placeholder="Type something like Jupiter"
+         (input)="query = onInput(searchQuery.value)">
+</mat-form-field>
+<div *ngIf="images$ | async as images">
+  <div *ngFor="let item of images.collection.items">
+    <nasa-image-card [imageItem]="item"></nasa-image-card>
+  </div>
+</div>
