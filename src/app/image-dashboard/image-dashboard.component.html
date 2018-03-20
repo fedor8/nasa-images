@@ -2,10 +2,16 @@
   <input matInput name="searchQuery"
          #searchQuery
          placeholder="Type something like 'Jupiter', 'Venus', 'NGC', etc."
-         (input)="query = onInput(searchQuery.value)">
+         [value]="initValue"
+         (input)="onInput(searchQuery.value)">
 </mat-form-field>
 <div *ngIf="images$ | async as images">
-  <div *ngFor="let item of images.collection.items">
-    <nasa-image-card [imageItem]="item"></nasa-image-card>
-  </div>
+  <mat-grid-list cols="4" rowHeight="600px">
+    <mat-grid-tile
+      *ngFor="let item of images.collection.items"
+      [colspan]="1"
+      [rowspan]="1">
+      <nasa-image-card class="nasa-image-card" [imageItem]="item"></nasa-image-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

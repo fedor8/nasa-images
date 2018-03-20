@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import {MatCardModule, MatInputModule} from '@angular/material';
+import {MatCardModule, MatGridListModule, MatInputModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { ImageDashboardComponent } from './image-dashboard/image-dashboard.component';
@@ -17,7 +17,7 @@ import { ImageCardComponent } from './image-dashboard/image-card/image-card.comp
     ImageCardComponent
   ],
   imports: [
-    BrowserModule, BrowserAnimationsModule, MatInputModule, MatCardModule, HttpClientModule
+    BrowserModule, BrowserAnimationsModule, MatInputModule, MatCardModule, MatGridListModule, HttpClientModule
   ],
   providers: [ImageSearchService],
   bootstrap: [AppComponent]
