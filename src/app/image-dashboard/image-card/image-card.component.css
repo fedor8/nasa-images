@@ -13,7 +13,7 @@
   text-overflow: ellipsis;
 }
 .image-description{
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 150px;
 }
 .nasa-image-card{
