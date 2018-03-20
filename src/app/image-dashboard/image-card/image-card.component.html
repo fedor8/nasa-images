@@ -1,1 +1,15 @@
-<img *ngIf="imageItem.links" [src]="imageItem.links[0]?.href"/>
+<mat-card class="example-card" *ngIf="imageItem.links">
+  <mat-card-header>
+    <mat-card-title>{{imageItem.data[0].title}}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="imageItem.links[0]?.href" alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{imageItem.data[0].description}}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button>LIKE</button>
+    <button mat-button>SHARE</button>
+  </mat-card-actions>
+</mat-card>

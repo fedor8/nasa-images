@@ -9,7 +9,7 @@ export class ImageSearchService {
   constructor(private _http: HttpClient) { }
 
   public getImages$(query: string): Observable<NasaImages> {
-    return this._http.get<NasaImages>('https://images-api.nasa.gov/search', {params: {q: query}});
+    return this._http.get<NasaImages>('https://images-api.nasa.gov/search', {params: {q: query}}).pipe();
   }
 
 }
