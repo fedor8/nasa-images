@@ -5,10 +5,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build": "ng build --prod  --base-href \"https://fedor8.github.io/nasa-images/\"",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "gh-page": "angular-cli-ghpages --repo=https://GH_TOKEN@github.com/fedor8/nasa-images.git -S"
   },
   "private": true,
   "dependencies": {

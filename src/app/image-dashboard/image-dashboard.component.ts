@@ -25,7 +25,7 @@ export class ImageDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.images$ = this.query$$.asObservable().pipe(
+    this.images$ = this.query$$.pipe(
       debounceTime(500),
       switchMap((query) => this.imageSearchService.getImages$(query)),
       catchError((err) => {

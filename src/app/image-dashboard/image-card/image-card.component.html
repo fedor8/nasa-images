@@ -1,6 +1,7 @@
 <mat-card class="example-card" *ngIf="imageItem.links">
   <mat-card-header class="example-card-header">
-    <mat-card-title>{{imageItem.data[0].title}}</mat-card-title>
+    <mat-card-title matTooltip="{{imageItem.data[0].title}}">{{imageItem.data[0].title}}</mat-card-title>
+    <mat-card-subtitle>{{imageItem.data[0].date_created | date}}</mat-card-subtitle>
   </mat-card-header>
   <img class="example-card-image" mat-card-image [src]="imageItem.links[0]?.href" alt="Image not found">
   <mat-card-content>
