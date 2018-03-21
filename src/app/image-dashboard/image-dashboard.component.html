@@ -5,6 +5,22 @@
          [value]="initValue"
          (input)="onInput(searchQuery.value)">
 </mat-form-field>
+<mat-form-field class="year-field">
+  <input matInput value="" name="yearFrom" #yearFrom
+         type="number"
+         placeholder="Year from"
+         [max]="yearTo.value"
+         [min]="1950"
+         (input)="onSetYearFrom(yearFrom.value, yearFrom.checkValidity())">
+</mat-form-field>
+<mat-form-field class="year-field">
+  <input matInput value="" name="yearTo" #yearTo
+         type="number"
+         placeholder="Year to"
+         [max]="2018"
+         [min]="yearFrom.value"
+         (input)="onSetYearTo(yearTo.value, yearTo.checkValidity())">
+</mat-form-field>
 <div *ngIf="images$ | async as images">
   <mat-grid-list cols="4" rowHeight="700px">
     <mat-grid-tile

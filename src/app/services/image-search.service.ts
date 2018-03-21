@@ -10,8 +10,20 @@ export class ImageSearchService {
   constructor(private _http: HttpClient) {
   }
 
-  public getImages$(query: string): Observable<NasaImages> {
-    return this._http.get<NasaImages>('https://images-api.nasa.gov/search', {params: {q: query}})
+  public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImages> {
+    const params = {};
+    params['q'] = query;
+    if (yearFrom) {
+      params['year_start'] = yearFrom;
+    }
+    if (yearTo) {
+      params['year_end'] = yearTo;
+    }
+    return this._http.get<NasaImages>(
+      'https://images-api.nasa.gov/search',
+      {
+        params: params
+      })
       .pipe(catchError(err => {
           console.error('getImages$', err);
           return Observable.of(null);
