@@ -6,7 +6,7 @@
          (input)="onInput(searchQuery.value)">
 </mat-form-field>
 <div *ngIf="images$ | async as images">
-  <mat-grid-list cols="4" rowHeight="600px">
+  <mat-grid-list cols="4" rowHeight="700px">
     <mat-grid-tile
       *ngFor="let item of images.collection.items"
       [colspan]="1"

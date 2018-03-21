@@ -1,3 +1,6 @@
+.mat-card{
+  margin: 15px;
+}
 .example-card{
   height: 600px;
 }
@@ -6,11 +9,17 @@
 }
 .example-card-image{
   max-height: 400px;
+  max-width: 300px;
+  padding: 24px;
+}
+.example-card-image-container{
+  align-content: center;
 }
 .mat-card-title{
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
+  max-width: 300px;
 }
 .image-description{
   overflow-y: auto;

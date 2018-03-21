@@ -3,7 +3,8 @@ import {ImageSearchService} from '../services/image-search.service';
 import {Observable} from 'rxjs/Observable';
 import {NasaImages} from '../classes/nasa-images';
 import {Subject} from 'rxjs/Subject';
-import {debounceTime, switchMap} from 'rxjs/operators';
+import {catchError, debounceTime, switchMap} from 'rxjs/operators';
+import 'rxjs/add/observable/of';
 
 @Component({
   selector: 'nasa-image-dashboard',
@@ -24,9 +25,13 @@ export class ImageDashboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.images$ = this.query$$.pipe(
+    this.images$ = this.query$$.asObservable().pipe(
       debounceTime(500),
-      switchMap((query) => this.imageSearchService.getImages$(query)));
+      switchMap((query) => this.imageSearchService.getImages$(query)),
+      catchError((err) => {
+        console.error('imageSearchServiceError', err);
+        return Observable.of(null);
+      }));
     this.initValue = 'Planetary Nebula';
 
   }
