@@ -10,3 +10,15 @@
 .year-field{
   width: 100px;
 }
+.search-filter-controls{
+
+}
+.results-list{
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  width: calc(100% - 10px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-top: 30px;
+}

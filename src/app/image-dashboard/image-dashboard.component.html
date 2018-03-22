@@ -1,27 +1,30 @@
-<mat-form-field class="example-full-width">
-  <input matInput name="searchQuery"
-         #searchQuery
-         placeholder="Type something like 'Jupiter', 'Venus', 'NGC', etc."
-         [value]="initValue"
-         (input)="onInput(searchQuery.value)">
-</mat-form-field>
-<mat-form-field class="year-field">
-  <input matInput value="" name="yearFrom" #yearFrom
-         type="number"
-         placeholder="Year from"
-         [max]="yearTo.value"
-         [min]="1950"
-         (input)="onSetYearFrom(yearFrom.value, yearFrom.checkValidity())">
-</mat-form-field>
-<mat-form-field class="year-field">
-  <input matInput value="" name="yearTo" #yearTo
-         type="number"
-         placeholder="Year to"
-         [max]="2018"
-         [min]="yearFrom.value"
-         (input)="onSetYearTo(yearTo.value, yearTo.checkValidity())">
-</mat-form-field>
-<div *ngIf="images$ | async as images">
+<div class="search-filter-controls">
+  <mat-form-field class="example-full-width">
+    <input matInput name="searchQuery"
+           #searchQuery
+           placeholder="Type something like 'Jupiter', 'Venus', 'NGC', etc."
+           [value]="initValue"
+           (input)="onInput(searchQuery.value)">
+  </mat-form-field>
+  <mat-form-field class="year-field">
+    <input matInput value="" name="yearFrom" #yearFrom
+           type="number"
+           placeholder="Year from"
+           [max]="yearTo.value"
+           [min]="1950"
+           (input)="onSetYearFrom(yearFrom.value, yearFrom.checkValidity())">
+  </mat-form-field>
+  <mat-form-field class="year-field">
+    <input matInput value="" name="yearTo" #yearTo
+           type="number"
+           placeholder="Year to"
+           [max]="2018"
+           [min]="yearFrom.value"
+           (input)="onSetYearTo(yearTo.value, yearTo.checkValidity())">
+  </mat-form-field>
+</div>
+<mat-divider></mat-divider>
+<div class="results-list scroll" (scroll)="onScroll($event, images.collection.links)" *ngIf="images$ | async as images">
   <mat-grid-list cols="4" rowHeight="700px">
     <mat-grid-tile
       *ngFor="let item of images.collection.items"

@@ -1,1 +1,33 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-button {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: indigo;
+  border: 54px none #8eff88;
+  border-radius: 79px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: darkblue;
+}
+::-webkit-scrollbar-thumb:active {
+  background: darkblue;
+}
+::-webkit-scrollbar-track {
+  background: #D2D3D2;
+  border: 0px none #ffffff;
+  border-radius: 19px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #D6D6D6;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

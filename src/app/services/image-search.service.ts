@@ -11,8 +11,7 @@ export class ImageSearchService {
   }
 
   public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImages> {
-    const params = {};
-    params['q'] = query;
+    const params = {q: query};
     if (yearFrom) {
       params['year_start'] = yearFrom;
     }
@@ -29,6 +28,17 @@ export class ImageSearchService {
           return Observable.of(null);
         }
       ));
+  }
+
+  public getImagesNextPage$(url: string): Observable<NasaImages> {
+    if (url != null) {
+      return this._http.get<NasaImages>(url)
+        .pipe(catchError(err => {
+            console.error('getImagesNextPage$', err);
+            return Observable.of(null);
+          }
+        ));
+    } else { return Observable.of(null); }
   }
 
 }
