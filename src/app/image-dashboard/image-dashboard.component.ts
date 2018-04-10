@@ -1,11 +1,11 @@
 import {AfterContentInit, AfterViewInit, Component, OnInit} from '@angular/core';
-import {ImageSearchService} from '../services/image-search.service';
+import {ImageSearchService} from '../common/services/image-search.service';
 import {Observable} from 'rxjs/Observable';
-import {NasaImages} from '../classes/nasa-images';
+import {NasaImages} from '../common/classes/nasa-images';
 import {Subject} from 'rxjs/Subject';
 import {catchError, debounceTime, switchMap, combineLatest, startWith, concatAll, concat, bufferWhen} from 'rxjs/operators';
 import 'rxjs/add/observable/of';
-import {NasaPageLink} from '../classes/nasa-page-link';
+import {NasaPageLink} from '../common/classes/nasa-page-link';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/interval';

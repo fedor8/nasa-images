@@ -1,6 +1,6 @@
 import {NasaPageLink} from './nasa-page-link';
 
-export class NasaImageData {
+export interface NasaImageData {
   center: string;
   date_created: Date;
   description: string;

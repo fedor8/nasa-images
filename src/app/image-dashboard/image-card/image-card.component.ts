@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {NasaImageItem} from '../../classes/nasa-image-item';
-import {NasaImageData} from '../../classes/nasa-image-data';
+import {NasaImageItem} from '../../common/classes/nasa-image-item';
+import {NasaImageData} from '../../common/classes/nasa-image-data';
 
 @Component({
   selector: 'nasa-image-card',

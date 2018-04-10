@@ -5,7 +5,7 @@ import {MatCardModule, MatDividerModule, MatGridListModule, MatInputModule, MatT
 
 import { AppComponent } from './app.component';
 import { ImageDashboardComponent } from './image-dashboard/image-dashboard.component';
-import {ImageSearchService} from './services/image-search.service';
+import {ImageSearchService} from './common/services/image-search.service';
 import {HttpClientModule} from '@angular/common/http';
 import { ImageCardComponent } from './image-dashboard/image-card/image-card.component';
 

@@ -1,4 +1,4 @@
-export class NasaPageLink {
+export interface NasaPageLink {
   href: string;
   promt: string;
   rel: string;
