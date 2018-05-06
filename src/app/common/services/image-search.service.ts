@@ -1,16 +1,19 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
 import {NasaImages} from '../classes/nasa-images';
 import {catchError} from 'rxjs/operators';
+import {BASE_URL, BASE_URL_TOKEN} from '../config';
 
 @Injectable()
 export class ImageSearchService {
 
-  constructor(private _http: HttpClient) {
+  constructor(private _http: HttpClient,
+              @Inject(BASE_URL_TOKEN) private _baseUrl: string) {
   }
 
   public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImages> {
+    console.log('_baseUrl', this._baseUrl);
     const params = {q: query};
     if (yearFrom) {
       params['year_start'] = yearFrom;
@@ -19,7 +22,7 @@ export class ImageSearchService {
       params['year_end'] = yearTo;
     }
     return this._http.get<NasaImages>(
-      'https://images-api.nasa.gov/search',
+      this._baseUrl,
       {
         params: params
       })
