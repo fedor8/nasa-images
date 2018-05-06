@@ -25,11 +25,11 @@
     "core-js": "^2.4.1",
     "rxjs": "^5.5.6",
     "zone.js": "^0.8.19",
-    "@angular/material": "latest",
-    "@angular/cdk": "latest"
+    "@angular/material": "^5.2.0",
+    "@angular/cdk": "^5.2.0"
   },
   "devDependencies": {
-    "@angular/cli": "1.6.6",
+    "@angular/cli": "^1.6.6",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
