@@ -39,12 +39,12 @@ export class ImageDashboardComponent implements OnInit {
     this.initValue = 'Planetary Nebula';
     this.images$ = this.query$$.pipe(
       startWith(this.initValue),
-      debounceTime(500),
       combineLatest(
-        this.yearFrom$$.pipe(startWith(null), debounceTime(500)),
-        this.yearTo$$.pipe(startWith(null), debounceTime(500)),
+        this.yearFrom$$.pipe(startWith(null)),
+        this.yearTo$$.pipe(startWith(null)),
         (query, yearFrom, yearTo) => ({query, yearFrom, yearTo})
       ),
+      debounceTime(500),
       switchMap(({query, yearFrom, yearTo}) => this.imageSearchService.getImages$(query, yearFrom, yearTo)),
 /*      bufferWhen(
         () => this.nextPage$$.pipe(
