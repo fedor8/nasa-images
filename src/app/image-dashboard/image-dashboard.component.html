@@ -25,7 +25,7 @@
   <span>Loaded {{images.length}} of {{allItemsCount}} images.</span>
 </div>
 <mat-divider></mat-divider>
-<div class="results-list scroll" (scroll)="onScroll($event, nextPage)">
+<div class="results-list scroll" (scroll)="onScroll($event)">
   <mat-grid-list cols="4" rowHeight="700px">
     <mat-grid-tile
       *ngFor="let item of images"
