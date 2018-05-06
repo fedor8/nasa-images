@@ -1,14 +1,13 @@
-import {AfterContentInit, AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ImageSearchService} from '../common/services/image-search.service';
 import {Observable} from 'rxjs/Observable';
-import {NasaImages} from '../common/classes/nasa-images';
+import {NasaImagesSearchResult} from '../common/classes/nasa-images';
 import {Subject} from 'rxjs/Subject';
 import {
   catchError, debounceTime, switchMap, combineLatest, startWith, concatAll, concat, bufferWhen,
-  distinctUntilChanged
+  distinctUntilChanged, tap
 } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
-import {NasaPageLink} from '../common/classes/nasa-page-link';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/observable/interval';
@@ -17,7 +16,7 @@ import 'rxjs/add/operator/reduce';
 import {NasaImageItem} from '../common/classes/nasa-image-item';
 import {Subscription} from 'rxjs/Subscription';
 
-const INIT_VALUE = 'Planetary Nebula';
+const INIT_VALUE = 'Planet';
 
 @Component({
   selector: 'nasa-image-dashboard',
@@ -45,17 +44,25 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
     this.imageSearchService = _imageSearchService;
   }
 
-  mapNasaImagesToNasaImageItems(nasaImages: NasaImages) {
-    if (nasaImages.collection.links) {
-      const nextLink = nasaImages.collection.links.find((element, index, array) => element.rel === 'next');
+  mapNasaImagesToNasaImageItems(result: NasaImagesSearchResult) {
+    if (result.collection.links) {
+      const nextLink = result.collection.links.find((element, index, array) => element.rel === 'next');
       if (nextLink) {
         this.nextPage = nextLink.href;
       }
     } else {
       this.nextPage = null;
     }
-    this.allItemsCount = nasaImages.collection.metadata.total_hits;
-    return Observable.of(nasaImages.collection.items);
+    const itemsWithImages = result.collection.items.filter(
+      (item: NasaImageItem) => {
+        const hasImageLink = item.links && item.links.find((element) => element.render === 'image') !== undefined;
+        if (!hasImageLink) {
+          this.allItemsCount--;
+        }
+        return hasImageLink;
+      }
+    );
+    return Observable.of(itemsWithImages);
   }
 
   ngOnInit() {
@@ -69,6 +76,9 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
       ),
       debounceTime(500),
       switchMap(({query, yearFrom, yearTo}) => this.imageSearchService.getImages$(query, yearFrom, yearTo)),
+      tap((result: NasaImagesSearchResult) => {
+        this.allItemsCount = result.collection.metadata.total_hits;
+      }),
       switchMap(this.mapNasaImagesToNasaImageItems.bind(this)),
       catchError((err) => {
         console.error('imageSearchServiceError', err);
@@ -79,13 +89,12 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
     });
 
 
-
     this.nextPageSubscription = this.nextPage$$.pipe(
       distinctUntilChanged(),
-      switchMap((nextPage) =>  this.imageSearchService.getImagesNextPage$(nextPage)),
-      switchMap(this.mapNasaImagesToNasaImageItems.bind(this))
-    ).subscribe((value: NasaImageItem[]) => {
-      this.images = this.images.concat(value);
+      switchMap((nextPage) => this.imageSearchService.getImagesNextPage$(nextPage)),
+      switchMap(this.mapNasaImagesToNasaImageItems.bind(this)),
+    ).subscribe((images: NasaImageItem[]) => {
+      this.images = this.images.concat(images);
     });
 
 
@@ -115,7 +124,6 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
 
   onScroll($event) {
     if (this.nextPage && $event.target.scrollTop + $event.target.clientHeight + 200 >= $event.target.scrollHeight) {
-      console.error('BOTTOM');
       if (this.nextPage) {
         this.nextPage$$.next(this.nextPage);
       }

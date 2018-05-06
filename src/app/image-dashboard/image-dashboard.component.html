@@ -22,7 +22,7 @@
            [min]="yearFrom.value"
            (input)="onSetYearTo(yearTo.value, yearTo.checkValidity())">
   </mat-form-field>
-  <span>Total items found: [{{allItemsCount}}]</span>
+  <span>Loaded {{images.length}} of {{allItemsCount}} images.</span>
 </div>
 <mat-divider></mat-divider>
 <div class="results-list scroll" (scroll)="onScroll($event, nextPage)">

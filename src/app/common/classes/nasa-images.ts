@@ -1,5 +1,5 @@
 import {NasaImagesCollection} from './nasa-images-collection';
 
-export interface NasaImages {
+export interface NasaImagesSearchResult {
   collection?: NasaImagesCollection;
 }

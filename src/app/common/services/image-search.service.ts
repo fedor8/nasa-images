@@ -1,7 +1,7 @@
 import {Inject, Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {HttpClient} from '@angular/common/http';
-import {NasaImages} from '../classes/nasa-images';
+import {NasaImagesSearchResult} from '../classes/nasa-images';
 import {catchError} from 'rxjs/operators';
 import {BASE_URL, BASE_URL_TOKEN} from '../config';
 
@@ -12,7 +12,7 @@ export class ImageSearchService {
               @Inject(BASE_URL_TOKEN) private _baseUrl: string) {
   }
 
-  public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImages> {
+  public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImagesSearchResult> {
     const params = {q: query};
     if (yearFrom) {
       params['year_start'] = yearFrom;
@@ -20,7 +20,7 @@ export class ImageSearchService {
     if (yearTo) {
       params['year_end'] = yearTo;
     }
-    return this._http.get<NasaImages>(
+    return this._http.get<NasaImagesSearchResult>(
       this._baseUrl,
       {
         params: params
@@ -32,9 +32,9 @@ export class ImageSearchService {
       ));
   }
 
-  public getImagesNextPage$(url: string): Observable<NasaImages> {
+  public getImagesNextPage$(url: string): Observable<NasaImagesSearchResult> {
     if (url != null) {
-      return this._http.get<NasaImages>(url)
+      return this._http.get<NasaImagesSearchResult>(url)
         .pipe(catchError(err => {
             console.error('getImagesNextPage$', err);
             return Observable.of(null);
