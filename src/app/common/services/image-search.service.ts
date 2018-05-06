@@ -13,7 +13,6 @@ export class ImageSearchService {
   }
 
   public getImages$(query: string, yearFrom?: string, yearTo?: string): Observable<NasaImages> {
-    console.log('_baseUrl', this._baseUrl);
     const params = {q: query};
     if (yearFrom) {
       params['year_start'] = yearFrom;

@@ -4,7 +4,7 @@
            #searchQuery
            placeholder="Type something like 'Jupiter', 'Venus', 'NGC', etc."
            [value]="initValue"
-           (input)="onInput(searchQuery.value)">
+           (input)="onQueryInput(searchQuery.value)">
   </mat-form-field>
   <mat-form-field class="year-field">
     <input matInput value="" name="yearFrom" #yearFrom

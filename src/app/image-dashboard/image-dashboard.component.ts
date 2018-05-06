@@ -28,7 +28,6 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
 
   public imageSearchService: ImageSearchService;
 
-  public images$: Observable<NasaImageItem[]>;
   public images: NasaImageItem[];
   private imagesSubscription: Subscription;
 
@@ -83,7 +82,7 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
 
     this.nextPageSubscription = this.nextPage$$.pipe(
       distinctUntilChanged(),
-      switchMap(() =>  this.imageSearchService.getImagesNextPage$(this.nextPage)),
+      switchMap((nextPage) =>  this.imageSearchService.getImagesNextPage$(nextPage)),
       switchMap(this.mapNasaImagesToNasaImageItems.bind(this))
     ).subscribe((value: NasaImageItem[]) => {
       this.images = this.images.concat(value);
@@ -98,7 +97,7 @@ export class ImageDashboardComponent implements OnInit, OnDestroy {
        count.subscribe(x => console.log(x));*/
   }
 
-  onInput(value: string) {
+  onQueryInput(value: string) {
     this.query$$.next(value);
   }
 
