@@ -5,7 +5,7 @@ import {NasaPageMetadata} from './nasa-page-metadata';
 export interface NasaImagesCollection {
   href: string;
   items: NasaImageItem[];
-  links: NasaPageLink[];
+  links?: NasaPageLink[];
   metadata: NasaPageMetadata;
   version: string;
 }

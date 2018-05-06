@@ -22,12 +22,13 @@
            [min]="yearFrom.value"
            (input)="onSetYearTo(yearTo.value, yearTo.checkValidity())">
   </mat-form-field>
+  <span>Total items found: [{{allItemsCount}}]</span>
 </div>
 <mat-divider></mat-divider>
-<div class="results-list scroll" (scroll)="onScroll($event, images.collection.links)" *ngIf="images$ | async as images">
+<div class="results-list scroll" (scroll)="onScroll($event, nextPage)">
   <mat-grid-list cols="4" rowHeight="700px">
     <mat-grid-tile
-      *ngFor="let item of images.collection.items"
+      *ngFor="let item of images"
       [colspan]="1"
       [rowspan]="1">
       <nasa-image-card class="nasa-image-card" [imageItem]="item"></nasa-image-card>
